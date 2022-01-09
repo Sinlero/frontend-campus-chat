@@ -1,7 +1,7 @@
 <template>
 
   <div id="connect-method">
-    <button @click="ping">Ping!!!</button>
+    <button @click="ping">{{pingPongButton}}!!!</button>
     <br>
     <p>Current chat: {{room}}</p>
     <input v-model="room" placeholder="chat name"/>
@@ -32,6 +32,7 @@ export default {
       message: '',
       socket: null,
       channel: null,
+      pingPongButton: 'Ping',
       items: []
     }
   },
@@ -43,7 +44,7 @@ export default {
   methods: {
     ping() {
       this.channel.push("ping")
-          .receive("ok", payload => console.log("phoenix replied:", payload))
+          .receive("ok", () => { this.pingPongButton === 'Ping' ? this.pingPongButton = 'Pong' : this.pingPongButton = 'Ping' })
           .receive("error", err => console.log("phoenix errored", err))
           .receive("timeout", () => console.log("timed out pushing"))
     },
@@ -56,20 +57,13 @@ export default {
       this.channel.join()
           .receive("ok", resp => { console.log("Joined successfully", resp) })
           .receive("error", resp => { console.log("Unable to join", resp) });
-      this.channel.on("new_msg", payload  => {
-        this.items.push(payload.body)
-      })
     },
     sendMsg() {
       this.channel.push("new_msg", {id: this.counter, body: this.message})
           .receive("ok", payload => console.log("phoenix replied:", payload))
           .receive("error", err => console.log("phoenix errored", err))
-          // .receive("timeout", () => console.log("timed out pushing"));
       this.message = "";
       this.counter++;
-      // console.log("send message to server: ");
-      // console.log(this.room);
-      // console.log(this.message);
     }
   }
 }
