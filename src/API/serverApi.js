@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const api = 'http://192.168.0.105:4000/api';
-// const api = 'http://localhost:4000/api';
+const address = '192.168.202.104';
+const port = '4000';
 
-const baseURL = `${api}`;
+const baseURL   = `http://${address}:${port}/api`;
+const socketURL =   `ws://${address}:${port}/socket`;
 
 const API = axios.create({
     withCredentials: true,
@@ -20,7 +21,8 @@ const API = axios.create({
 
 
 export default {
-    api,
+    socketURL,
+    baseURL,
     getEcho() {
       return API.get(`/echo`);
     },
