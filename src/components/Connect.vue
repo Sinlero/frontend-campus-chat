@@ -66,7 +66,7 @@ export default {
     join() {
 
       console.log("Connect via websocket");
-      this.socket = new Socket("ws://192.168.0.105:4000/socket", {params: {token: this.token}});
+      this.socket = new Socket(API.socketURL, {params: {token: this.token}});
       this.socket.connect();
 
       console.log("Joining to channel: " + this.room);
@@ -93,16 +93,15 @@ export default {
       let auth = {
         login: this.login,
         password: this.password
-      }
+      };
       API.auth(auth).then(() => API.getToken().then(resp => (this.token = resp.data)))
-      this.logged = true;
+                    .then(() => this.logged = true);
     },
     logout() {
-      API.logout()
-      this.logged = false;
+      API.logout().then( () => this.logged = false);
     },
     echo() {
-      API.getEcho()
+      API.getEcho();
     }
   }
 }
