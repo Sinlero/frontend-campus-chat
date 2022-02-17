@@ -1,4 +1,4 @@
-# hello-world
+# Frontend campus chat
 
 ## Project setup
 ```
