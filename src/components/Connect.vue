@@ -1,33 +1,87 @@
 <template>
-
-  <div id="connect-method">
-
-    <div class="auth">
-      <label>Login</label>
-      <input v-model="login" placeholder="login">
-      <label>Password</label>
-      <input v-model="password" placeholder="password" type="password">
-      <button class="authButton" @click="authorize">Login</button>
-      <button v-show="logged" class="logoutButton" @click="logout">Logout</button>
-      <button v-show="logged" class="logoutButton" @click="echo">Echo</button>
-    </div>
-
-    <button @click="ping">{{ pingPongButton }}!!!</button>
-    <br>
-    <p>Current chat: {{ room }}</p>
-    <input v-model="room" placeholder="chat name"/>
-    <br>
-    <button @click="join">Join chat</button>
-    <br>
-    <div v-for="item in items" :key="item.id">
-      {{ item.body }}
-    </div>
-    <br>
-    <textarea v-model="message" placeholder="Write your message here!!!"></textarea>
-    <br>
-    <button @click="sendMsg">Send message</button>
-  </div>
-
+  <v-container>
+    <v-row >
+        <v-text-field
+            v-model="login"
+            label="Login"
+            hide-details="auto"
+        ></v-text-field>
+    </v-row>
+    <v-row>
+      <v-text-field
+          v-model="password"
+          :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="passwordShow ? 'text' : 'password'"
+          name="input-10-2"
+          label="Password"
+          value=""
+          class="input-group--focused"
+          @click:append="passwordShow = !passwordShow"
+      ></v-text-field>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-btn
+            color="primary"
+            v-on:click="authorize">
+          Login
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn
+            color="error"
+            v-on:click="logout"
+            :disabled = "!logged">
+          Logout
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn
+            v-on:click="echo"
+            :disabled = "!logged">
+          Echo
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row justify="center" align-content="center">
+      <v-text-field
+        v-model="room"
+        filled
+        label="Current chat room"
+        clearable></v-text-field>
+      <v-btn
+          v-on:click="join"
+          :disabled = "!logged">
+        Join chat
+      </v-btn>
+      <v-btn
+          v-on:click="ping"
+          :disabled = "!logged">
+        {{pingPongButton}}
+      </v-btn>
+    </v-row>
+    <v-row v-for="item in items" :key="item.id">
+      {{item.body}}
+    </v-row>
+    <v-row>
+      <v-textarea
+          v-model="message"
+          name="input-7-1"
+          filled
+          label="Text of message"
+          auto-grow
+          value=""
+      ></v-textarea>
+    </v-row>
+    <v-row>
+      <v-btn
+          color="primary"
+          :disabled = "!logged"
+          v-on:click="sendMsg">
+        Send message
+      </v-btn>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -49,7 +103,8 @@ export default {
       login: '',
       password: '',
       logged: false,
-      token: ''
+      token: '',
+      passwordShow: false
     }
   },
   mounted() {
@@ -108,15 +163,4 @@ export default {
 </script>
 
 <style scoped>
-.auth {
-  justify-content: center;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 100px 250px;
-  grid-template-rows: 1fr 1fr 1fr;
-  padding-bottom: 20px;
-}
-.authButton {
-  grid-column: span 2;
-}
 </style>
