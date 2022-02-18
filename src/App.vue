@@ -38,6 +38,7 @@
     </v-app-bar>
 
     <v-main>
+      <TestComponent/>
       <Connect/>
     </v-main>
   </v-app>
@@ -45,11 +46,13 @@
 
 <script>
 import Connect from "@/components/Connect";
+import TestComponent from "@/components/TestComponent";
 
 export default {
   name: 'App',
 
   components: {
+    TestComponent,
     Connect
   },
 
