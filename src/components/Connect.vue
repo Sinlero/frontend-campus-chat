@@ -1,48 +1,5 @@
 <template>
   <v-container>
-    <v-row >
-        <v-text-field
-            v-model="login"
-            label="Login"
-            hide-details="auto"
-        ></v-text-field>
-    </v-row>
-    <v-row>
-      <v-text-field
-          v-model="password"
-          :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="passwordShow ? 'text' : 'password'"
-          name="input-10-2"
-          label="Password"
-          value=""
-          class="input-group--focused"
-          @click:append="passwordShow = !passwordShow"
-      ></v-text-field>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-btn
-            color="primary"
-            v-on:click="authorize">
-          Login
-        </v-btn>
-      </v-col>
-      <v-col>
-        <v-btn
-            color="error"
-            v-on:click="logout"
-            :disabled = "!logged">
-          Logout
-        </v-btn>
-      </v-col>
-      <v-col>
-        <v-btn
-            v-on:click="echo"
-            :disabled = "!logged">
-          Echo
-        </v-btn>
-      </v-col>
-    </v-row>
     <v-row justify="center" align-content="center">
       <v-text-field
         v-model="room"
