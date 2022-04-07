@@ -30,7 +30,7 @@ export default {
       return API.delete(`/login`);
     },
     getToken() {
-      return API.get(`/token`);
+      return API.get(`/token`).then((resp) => {return resp.data.token});
     },
     auth(auth) {
         try {
