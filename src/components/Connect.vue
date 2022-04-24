@@ -94,6 +94,7 @@ export default {
   name: "Connect",
   data() {
     return {
+      user: null,
       counter: 0,
       room: '',
       message: '',
@@ -140,7 +141,7 @@ export default {
           });
     },
     sendMsg() {
-      this.channel.push("new_msg", {room_id: 5, sender_id: this.login, text: this.message})
+      this.channel.push("new_msg", {room_id: 5, sender_id: this.user.id, text: this.message})
           .receive("ok", payload => console.log("phoenix replied:", payload))
           .receive("error", err => console.log("phoenix errored", err))
       this.message = "";
@@ -152,7 +153,9 @@ export default {
         password: this.password
       };
       API.auth(auth)
-                    .then(() => this.logged = true);
+                    .then((resp) => {
+                      this.user = resp.data
+                      this.logged = true});
     },
     logout() {
       API.logout().then( () => this.logged = false);
