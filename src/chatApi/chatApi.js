@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const address = '192.168.202.104';
-const port = '4000';
+const port = 4000;
 
-const baseURL   = `http://${address}:${port}/api`;
-const socketURL =   `ws://${address}:${port}/socket`;
+const baseURL   = `http://${location.hostname}:${port}/api`;
+const socketURL =   `ws://${location.hostname}:${port}/socket`;
 
 const API = axios.create({
     withCredentials: true,
@@ -24,13 +23,16 @@ export default {
     socketURL,
     baseURL,
     getEcho() {
-      return API.get(`/echo`);
+        return API.get(`/echo`);
     },
     logout() {
-      return API.delete(`/login`);
+        return API.delete(`/login`);
     },
     getToken() {
-      return API.get(`/token`).then((resp) => {return resp.data.token});
+        return API.get(`/token`).then((resp) => {return resp.data.token});
+    },
+    getRooms() {
+        return API.get('/chat/rooms').then((resp) => resp.data);
     },
     auth(auth) {
         try {

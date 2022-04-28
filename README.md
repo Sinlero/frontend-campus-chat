@@ -1,4 +1,4 @@
-# Frontend campus chat
+# frontend-campus-chat-vue-3
 
 ## Project setup
 ```
