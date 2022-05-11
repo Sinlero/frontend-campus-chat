@@ -1,10 +1,16 @@
 <template>
-<div>Message</div>
+<div>{{text}}</div>
 </template>
 
 <script>
 export default {
-  name: "DialogMessage"
+  name: "DialogMessage",
+  props: {
+    id: Number,
+    senderId: Number,
+    text: String,
+    time: String
+  }
 }
 </script>
 
