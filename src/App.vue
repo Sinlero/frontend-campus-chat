@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <ChatList/>
-    <Dialog/>
-    <button @click="logout">Logout</button>
+  <div class="chat">
+    <ChatList class="chat_list"/>
+    <Dialog class="dialog"/>
   </div>
 </template>
 
 <script>
 import ChatList from "@/components/chat/ChatList";
 import Dialog from "@/components/chat/Dialog";
-import {onMounted, onDeactivated} from "vue";
+import {onMounted} from "vue";
 import {useStore} from "vuex";
 export default {
   name: 'App',
@@ -19,18 +18,10 @@ export default {
   },
   setup() {
     const store = useStore();
-    function logout() {
-      store.dispatch("logout");
-    }
     onMounted(() => {
       let credentials = {login: "1652", password: "y6hyfk"};
       store.dispatch("auth", credentials);
     })
-    // onUnmounted(() => store.dispatch("logout"))
-    onDeactivated(() => store.dispatch("logout"))
-    return {
-      logout
-    }
   }
 
 }
@@ -44,5 +35,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.chat {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.chat_list {
+  display: grid;
 }
 </style>
