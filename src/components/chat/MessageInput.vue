@@ -1,6 +1,7 @@
 <template>
-<div>
-  <input placeholder="Input message...">
+<div class="input">
+  <textarea placeholder="Input message..."></textarea>
+  <button class="send-button">Send</button>
 </div>
 </template>
 
@@ -11,5 +12,18 @@ export default {
 </script>
 
 <style scoped>
-
+.input{
+  display: grid;
+  grid-template-columns: auto 45px;
+}
+.send-button {
+  height: 45px;
+  border: none;
+  color: white;
+  background-color: teal;
+  border-radius: 45px;
+}
+.send-button:hover {
+  cursor: pointer;
+}
 </style>
