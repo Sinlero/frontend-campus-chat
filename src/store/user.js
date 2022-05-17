@@ -1,4 +1,4 @@
-import ChatApi from "@/chatApi/chatApi"; ChatApi
+import ChatApi from "@/chatApi/chatApi";
 
 export default {
     state: {

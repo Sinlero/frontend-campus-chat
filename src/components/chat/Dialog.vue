@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="messages" v-if="dialog !== null">
+  <div  v-if="dialog !== null">
+    <div class="messages">
       <DialogMessage
           v-for="msg in dialog.messages"
           :class="isSender(msg)"
