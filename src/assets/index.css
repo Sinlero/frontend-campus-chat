@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-white dark:bg-gray-900;
+}
+
+.no-animations * {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
