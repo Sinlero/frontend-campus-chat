@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const port = 4000;
+const port = 4001;
 
-const baseURL   = `http://${location.hostname}:${port}/api`;
-const socketURL =   `ws://${location.hostname}:${port}/socket`;
+const baseURL   = `https://${location.hostname}:${port}/api`;
+const socketURL =   `wss://${location.hostname}:${port}/socket`;
 
 const API = axios.create({
     withCredentials: true,
