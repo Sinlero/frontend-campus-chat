@@ -9,7 +9,7 @@
         <DialogMessage
           :class="isSender(msg)"
           :id="msg.id"
-          :sender="getSenderName(msg.sender_id, dialog.id)"
+          :sender="getSenderName(msg, dialog.id)"
           :text="msg.text"
           :time="msg.time"
         ></DialogMessage>
@@ -48,8 +48,8 @@ export default {
       return { chat_member_container: true };
     };
 
-    const getSenderName = (senderId, chatId) => {
-      return state.getters.userName(senderId, chatId);
+    const getSenderName = (msg, chatId) => {
+      return state.getters.userName(msg, chatId);
     }
 
     return {

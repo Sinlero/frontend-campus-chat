@@ -1,13 +1,13 @@
 <template>
-  <div class="chats">
+  <div class="chats" v-if="dialogs">
     <ChatItem
       class="chat_item"
       v-for="dialog in dialogs"
       @click="selectDialog(dialog)"
       :key="dialog.id"
-      :name="dialog.name"
-      :sender="getSenderName(getLastMessage(dialog.id).sender_id, dialog.id)"
-      :preview-msg="getLastMessage(dialog.id).text.substring(0, 40)"
+      :name="getDialogName(dialog.id)"
+      :sender="getSenderName(getLastMessage(dialog.id), dialog.id)"
+      :preview-msg="getLastMessageText(dialog.id)"
     ></ChatItem>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
       return store.getters.lastMessage(chatId);
     };
 
+    const getLastMessageText = (chatId) => {
+      return store.getters.lastMessageText(chatId);
+    };
+
     const getSenderName = (senderId, chatId) => {
       return store.getters.userName(senderId, chatId);
     }
@@ -34,12 +38,18 @@ export default {
       return store.dispatch("selectDialog", dialog);
     };
 
+    const getDialogName = (chatId) => {
+      return store.getters.dialogName(chatId);
+    }
+
     return {
       dialogs: computed(() => store.getters.dialogs),
       lastMessage: computed(() => store.getters.lastMessage(store.getters.currentDialog.id)),
       getLastMessage,
       selectDialog,
       getSenderName,
+      getDialogName,
+      getLastMessageText,
     };
   },
 };
