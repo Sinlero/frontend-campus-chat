@@ -1,8 +1,8 @@
 <template>
   <div>
     <h2>{{ name }}</h2>
-    <div class="last_message">
-      <p>{{ sender }}:</p>
+    <div v-if="sender !== ''" class="last_message">
+      <p>{{ sender }}: </p>
       <p>{{ previewMsg }}</p>
     </div>
   </div>
